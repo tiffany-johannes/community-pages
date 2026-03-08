@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charlotte Communities | REMAX Executive</title>
+
+  <!-- Montserrat: closest freely available match to Gotham geometry -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────────────────────────────
+       PALETTE — from REMAX 2025 Brand Standards p.11
+       Using: Dark Blue, Dark Red (burgundy), Cream, White
+       Removed: Primary Blue (#0043FF), Bridge Red (#AA1120)
+    ───────────────────────────────────────*/
+    :root {
+      --navy:      #000E35;   /* Dark Blue  RGB 0/14/53    */
+      --navy-mid:  #0C2749;   /* Bridge Blue RGB 12/39/73  */
+      --burgundy:  #660000;   /* Dark Red   RGB 102/0/0    */
+      --cream:     #F7F5EE;   /* Cream      RGB 247/245/238*/
+      --off-white: #EEECE4;
+      --white:     #FFFFFF;
+      --text-muted: rgba(0,14,53,0.42);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      min-height: 100vh;
+    }
+
+    /* ══════════════════════════
+       HEADER
+    ══════════════════════════ */
+    header {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Thin burgundy top rule */
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--burgundy);
+    }
+
+    /* Subtle large watermark numeral for depth */
+    header::after {
+      content: 'CLT';
+      position: absolute;
+      right: -20px;
+      bottom: -40px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 220px;
+      font-weight: 800;
+      letter-spacing: -4px;
+      color: rgba(255,255,255,0.03);
+      pointer-events: none;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .header-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 60px 56px 68px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 40px;
+    }
+
+    .header-left { display: flex; flex-direction: column; gap: 20px; }
+
+    .header-logo {
+      height: 52px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .header-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--burgundy);
+    }
+
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 0.95;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.50);
+      max-width: 420px;
+      line-height: 1.8;
+    }
+
+    /* Thin vertical rule on right side */
+    .header-right {
+      border-left: 1px solid rgba(255,255,255,0.10);
+      padding-left: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-start;
+    }
+
+    .header-right .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.6rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .header-right .stat-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ══════════════════════════
+       MAIN
+    ══════════════════════════ */
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 64px 56px 96px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0,14,53,0.12);
+    }
+
+    .section-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--burgundy);
+    }
+
+    .section-count {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── CARDS ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1px;
+      background: rgba(0,14,53,0.10);
+      border: 1px solid rgba(0,14,53,0.10);
+    }
+
+    .card {
+      background: var(--cream);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      padding: 36px 32px 32px;
+      position: relative;
+      transition: background 0.25s ease;
+      overflow: hidden;
+    }
+
+    /* Burgundy left rule — appears on hover */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: var(--burgundy);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      background: var(--white);
+    }
+
+    .card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .card-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--navy);
+      line-height: 1.0;
+      margin-bottom: 6px;
+    }
+
+    .card-region {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      margin-bottom: 18px;
+    }
+
+    /* Thin rule separating title from desc */
+    .card-rule {
+      width: 24px;
+      height: 1px;
+      background: rgba(0,14,53,0.20);
+      margin-bottom: 18px;
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+
+    .card:hover .card-rule {
+      width: 40px;
+      background: var(--burgundy);
+    }
+
+    .card-desc {
+      font-size: 0.83rem;
+      font-weight: 400;
+      line-height: 1.70;
+      color: rgba(0,14,53,0.62);
+      flex: 1;
+      margin-bottom: 28px;
+    }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--navy);
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+
+    .card:hover .card-cta {
+      gap: 14px;
+      color: var(--burgundy);
+    }
+
+    .card-cta svg {
+      width: 12px; height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════
+       CONTACT STRIP
+    ══════════════════════════ */
+    .contact-strip {
+      background: var(--navy);
+      padding: 56px 56px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      max-width: 100%;
+    }
+
+    .contact-left .c-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      margin-bottom: 10px;
+    }
+
+    .contact-left .c-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .contact-left .c-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.30);
+    }
+
+    .contact-left .c-address {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+      margin-top: 6px;
+    }
+
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      padding-left: 40px;
+    }
+
+    .contact-right a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+
+    .contact-right a:hover { color: var(--white); }
+
+    /* ══════════════════════════
+       FOOTER
+    ══════════════════════════ */
+    footer {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 22px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer img {
+      height: 26px;
+      object-fit: contain;
+    }
+
+    footer p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+    }
+
+    /* ══════════════════════════
+       ANIMATIONS
+    ══════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(12px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .card { animation: fadeUp 0.5s ease both; }
+    .card:nth-child(1){animation-delay:.05s}
+    .card:nth-child(2){animation-delay:.10s}
+    .card:nth-child(3){animation-delay:.15s}
+    .card:nth-child(4){animation-delay:.20s}
+    .card:nth-child(5){animation-delay:.25s}
+    .card:nth-child(6){animation-delay:.30s}
+    .card:nth-child(7){animation-delay:.35s}
+
+    /* ══════════════════════════
+       RESPONSIVE
+    ══════════════════════════ */
+    @media (max-width: 768px) {
+      .header-inner { grid-template-columns: 1fr; padding: 40px 28px 48px; }
+      .header-right { display: none; }
+      main { padding: 48px 28px 72px; }
+      .grid { grid-template-columns: 1fr; }
+      .contact-strip { grid-template-columns: 1fr; padding: 44px 28px; }
+      .contact-right { align-items: flex-start; border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; }
+      footer { padding: 20px 28px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-left">
+        <img src="images/executive-logo-cream.png" alt="REMAX Executive" class="header-logo" />
+        <div>
+          <div class="header-eyebrow">Charlotte Area Real Estate</div>
+        </div>
+        <h1>Explore Our<br>Communities</h1>
+        <p>In-depth guides to the neighborhoods, towns, and communities that make the greater Charlotte area exceptional.</p>
+      </div>
+      <div class="header-right">
+        <span class="stat-num">11</span>
+        <span class="stat-label">Communities</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="section-header">
+      <span class="section-eyebrow">All Communities</span>
+      <span class="section-count">11 Guides</span>
+    </div>
+
+    <div class="grid">
+
+      <a class="card" href="ballantyne.html">
+        <div class="card-num">01</div>
+        <div class="card-title">Ballantyne</div>
+        <div class="card-region">Charlotte, NC</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">A master-planned community in south Charlotte known for premier amenities, top-rated schools, and a thriving corporate corridor.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="card" href="belmont.html">
+        <div class="card-num">02</div>
+        <div class="card-title">Belmont</div>
+        <div class="card-region">Gaston County, NC</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">A charming historic town with a vibrant walkable downtown, strong community ties, and an easy commute to Uptown Charlotte.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="card" href="fort-mill.html">
+        <div class="card-num">03</div>
+        <div class="card-title">Fort Mill</div>
+        <div class="card-region">York County, SC</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">One of South Carolina's fastest-growing communities — exceptional schools, master-planned neighborhoods, and outstanding value.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="card" href="lake-norman.html">
+        <div class="card-num">04</div>
+        <div class="card-title">Lake Norman</div>
+        <div class="card-region">Mecklenburg & Iredell Counties, NC</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">The largest man-made lake in North Carolina, surrounded by waterfront communities, boating culture, and upscale lakeside living.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="card" href="lake-wylie.html">
+        <div class="card-num">05</div>
+        <div class="card-title">Lake Wylie</div>
+        <div class="card-region">NC / SC Border</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">A relaxed lakeside community straddling the state line, prized for waterfront properties, recreational living, and favorable SC tax rates.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="card" href="myers-park.html">
+        <div class="card-num">06</div>
+        <div class="card-title">Myers Park</div>
+        <div class="card-region">Charlotte, NC</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">Charlotte's most prestigious historic neighborhood — tree-lined boulevards, stately homes, and proximity to the city's finest dining and culture.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="card" href="south-charlotte.html">
+        <div class="card-num">07</div>
+        <div class="card-title">South Charlotte</div>
+        <div class="card-region">Charlotte, NC</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">A broad collection of family-friendly neighborhoods with excellent schools, abundant shopping, and easy access to all Charlotte has to offer.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="card" href="south-end.html">
+        <div class="card-num">08</div>
+        <div class="card-title">South End</div>
+        <div class="card-region">Charlotte, NC</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">Charlotte's most walkable urban neighborhood — light rail access, converted warehouses, craft breweries, and a thriving arts and restaurant scene.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="card" href="uptown.html">
+        <div class="card-num">09</div>
+        <div class="card-title">Uptown</div>
+        <div class="card-region">Charlotte, NC</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">Charlotte's dynamic urban core — professional sports, world-class dining, luxury high-rises, and the heartbeat of the city's business and cultural life.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="card" href="waxhaw-marvin.html">
+        <div class="card-num">10</div>
+        <div class="card-title">Waxhaw / Marvin</div>
+        <div class="card-region">Union County, NC</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">Charming small-town character paired with exceptional Union County schools — one of the most sought-after areas for families in the greater Charlotte region.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+      <a class="card" href="weddington.html">
+        <div class="card-num">11</div>
+        <div class="card-title">Weddington</div>
+        <div class="card-region">Union County, NC</div>
+        <div class="card-rule"></div>
+        <p class="card-desc">An upscale suburban community known for its top-ranked schools, spacious estate lots, and a quiet, prestigious character just minutes from south Charlotte.</p>
+        <span class="card-cta">Explore <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+
+    </div>
+  </main>
+
+  <div class="contact-strip">
+    <div class="contact-left">
+      <div class="c-label">Ready to Find Your Community?</div>
+      <div class="c-name">Tiffany Johannes</div>
+      <div class="c-title">REMAX Executive &nbsp;·&nbsp; GRI · CRS</div>
+      <div class="c-address">12104 Copper Way, Suite 100 &nbsp;·&nbsp; Charlotte, NC 28277</div>
+    </div>
+    <div class="contact-right">
+      <a href="tel:7043017404">704.301.7404</a>
+      <a href="mailto:tiffany@cltexperts.com">tiffany@cltexperts.com</a>
+      <a href="https://charlottehomeexperts.com" target="_blank">charlottehomeexperts.com</a>
+    </div>
+  </div>
+
+  <footer>
+    <img src="images/executive-logo-cream.png" alt="REMAX Executive" />
+    <p>© 2026 Tiffany Johannes &nbsp;·&nbsp; REMAX Executive &nbsp;·&nbsp; Each Office Independently Owned and Operated</p>
+  </footer>
+
+</body>
+</html>
