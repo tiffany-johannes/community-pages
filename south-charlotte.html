@@ -106,6 +106,7 @@
         @media (max-width: 600px) { .top-bar-contact { display: none; } }
         
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
         <nav class="top-bar">
@@ -252,6 +253,23 @@
                     </div>
                 </li>
             </ul>
+        </section>
+
+                        <!-- EXPLORE THE AREA (MAP) -->
+        <section>
+            <span class="section-label">Explore the Area</span>
+            <h2>South Charlotte on the Map</h2>
+            <p>Get oriented across South Charlotte — its established neighborhoods, shopping at SouthPark, strong schools, and convenient access to the rest of the city.</p>
+            <div style="background: white; border-radius: var(--radius); box-shadow: 0 2px 16px rgba(0,0,0,0.04); overflow: hidden; margin-top: 28px;">
+                <div style="background: var(--navy); color: white; padding: 16px 28px; font-size: 0.95rem; font-weight: 600; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                    <span>South Charlotte &mdash; Area Map</span>
+                    <span style="background: rgba(170,17,32,0.15); border:1px solid #AA1120; color:#fff; padding:3px 12px; border-radius:20px; font-size:0.72rem; letter-spacing:1px; text-transform:uppercase;">Outlined Area</span>
+                </div>
+                <div id="map-south-charlotte" style="width: 100%; height: 480px;"></div>
+            </div>
+            <div style="text-align:center; margin-top:28px;">
+                <a href="https://www.charlottehomeexperts.com" target="_blank" rel="noopener" class="btn btn-primary">Search Available Homes in South Charlotte &rarr;</a>
+            </div>
         </section>
 
         <!-- SCHOOLS & COMMUTE -->
@@ -411,5 +429,7 @@
             if (!isOpen) { answer.classList.add('show'); button.classList.add('active'); }
         }
     </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>(function(){if(typeof L==='undefined')return;var map=L.map('map-south-charlotte',{scrollWheelZoom:false,zoomControl:true}).setView([35.090000,-80.835000],12);L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; <a href=\'https://www.openstreetmap.org/copyright\'>OpenStreetMap</a> &copy; <a href=\'https://carto.com/attributions\'>CARTO</a>'}).addTo(map);var style={color:'#AA1120',weight:3,opacity:0.9,fillColor:'#AA1120',fillOpacity:0.10};var c=L.circle([35.090000,-80.835000],Object.assign({radius:6500},style)).addTo(map);map.fitBounds(c.getBounds(),{padding:[24,24]});}());</script>
 </body>
 </html>

@@ -150,6 +150,7 @@
         @media (max-width: 600px) { .top-bar-contact { display: none; } }
         
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
 
@@ -288,6 +289,23 @@
                     </div>
                 </li>
             </ul>
+        </section>
+
+                        <!-- EXPLORE THE AREA (MAP) -->
+        <section>
+            <span class="section-label">Explore the Area</span>
+            <h2>Lake Wylie on the Map</h2>
+            <p>See the Lake Wylie area — lakefront living on the SC side, marinas and parks, and a short drive to Charlotte and the airport.</p>
+            <div style="background: white; border-radius: var(--radius); box-shadow: 0 2px 16px rgba(0,0,0,0.04); overflow: hidden; margin-top: 28px;">
+                <div style="background: var(--navy); color: white; padding: 16px 28px; font-size: 0.95rem; font-weight: 600; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                    <span>Lake Wylie &mdash; Area Map</span>
+                    <span style="background: rgba(170,17,32,0.15); border:1px solid #AA1120; color:#fff; padding:3px 12px; border-radius:20px; font-size:0.72rem; letter-spacing:1px; text-transform:uppercase;">Outlined Area</span>
+                </div>
+                <div id="map-lake-wylie" style="width: 100%; height: 480px;"></div>
+            </div>
+            <div style="text-align:center; margin-top:28px;">
+                <a href="https://www.charlottehomeexperts.com" target="_blank" rel="noopener" class="btn btn-primary">Search Available Homes in Lake Wylie &rarr;</a>
+            </div>
         </section>
 
         <!-- SCHOOLS & COMMUTE -->
@@ -470,5 +488,7 @@
             if (!isOpen) { answer.classList.add('show'); button.classList.add('active'); }
         }
     </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>(function(){if(typeof L==='undefined')return;var map=L.map('map-lake-wylie',{scrollWheelZoom:false,zoomControl:true}).setView([35.110422,-81.053806],12);L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; <a href=\'https://www.openstreetmap.org/copyright\'>OpenStreetMap</a> &copy; <a href=\'https://carto.com/attributions\'>CARTO</a>'}).addTo(map);var style={color:'#AA1120',weight:3,opacity:0.9,fillColor:'#AA1120',fillOpacity:0.10};var gj={"type":"Polygon","coordinates":[[[-81.07738,35.11468],[-81.07378,35.10779],[-81.07374,35.10575],[-81.07279,35.10539],[-81.0721,35.10401],[-81.07343,35.10162],[-81.07469,35.1013],[-81.06864,35.09787],[-81.05683,35.08726],[-81.05382,35.09142],[-81.05208,35.09628],[-81.05008,35.09882],[-81.04652,35.10062],[-81.03863,35.10216],[-81.03616,35.10321],[-81.03381,35.10558],[-81.03255,35.1091],[-81.03301,35.11375],[-81.03561,35.11858],[-81.03676,35.12255],[-81.03897,35.1263],[-81.05042,35.13105],[-81.05208,35.13349],[-81.05414,35.13267],[-81.06171,35.12626],[-81.0638,35.12626],[-81.06549,35.12514],[-81.06801,35.12439],[-81.06946,35.12327],[-81.07032,35.12125],[-81.07337,35.12111],[-81.07427,35.11631],[-81.07691,35.11677],[-81.07738,35.11468]]]};var layer=L.geoJSON(gj,{style:style}).addTo(map);map.fitBounds(layer.getBounds(),{padding:[24,24]});}());</script>
 </body>
 </html>

@@ -145,6 +145,7 @@
         @media (max-width: 600px) { .top-bar-contact { display: none; } }
         
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
         <nav class="top-bar">
@@ -287,6 +288,23 @@
                     </div>
                 </li>
             </ul>
+        </section>
+
+                        <!-- EXPLORE THE AREA (MAP) -->
+        <section>
+            <span class="section-label">Explore the Area</span>
+            <h2>Uptown Charlotte on the Map</h2>
+            <p>See Uptown Charlotte — the city's center for business, sports, arts, and high-rise living, organized around its four historic wards.</p>
+            <div style="background: white; border-radius: var(--radius); box-shadow: 0 2px 16px rgba(0,0,0,0.04); overflow: hidden; margin-top: 28px;">
+                <div style="background: var(--navy); color: white; padding: 16px 28px; font-size: 0.95rem; font-weight: 600; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                    <span>Uptown Charlotte &mdash; Area Map</span>
+                    <span style="background: rgba(170,17,32,0.15); border:1px solid #AA1120; color:#fff; padding:3px 12px; border-radius:20px; font-size:0.72rem; letter-spacing:1px; text-transform:uppercase;">Outlined Area</span>
+                </div>
+                <div id="map-uptown" style="width: 100%; height: 480px;"></div>
+            </div>
+            <div style="text-align:center; margin-top:28px;">
+                <a href="https://www.charlottehomeexperts.com" target="_blank" rel="noopener" class="btn btn-primary">Search Available Homes in Uptown Charlotte &rarr;</a>
+            </div>
         </section>
 
         <!-- SCHOOLS & COMMUTE -->
@@ -447,5 +465,7 @@
             if (!isOpen) { answer.classList.add('show'); button.classList.add('active'); }
         }
     </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>(function(){if(typeof L==='undefined')return;var map=L.map('map-uptown',{scrollWheelZoom:false,zoomControl:true}).setView([35.228576,-80.845288],12);L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; <a href=\'https://www.openstreetmap.org/copyright\'>OpenStreetMap</a> &copy; <a href=\'https://carto.com/attributions\'>CARTO</a>'}).addTo(map);var style={color:'#AA1120',weight:3,opacity:0.9,fillColor:'#AA1120',fillOpacity:0.10};var gj={"type":"Polygon","coordinates":[[[-80.86249,35.22575],[-80.86188,35.22498],[-80.85599,35.22476],[-80.85262,35.22378],[-80.84862,35.22115],[-80.84626,35.21997],[-80.84488,35.21836],[-80.84179,35.21591],[-80.83924,35.21515],[-80.83705,35.21585],[-80.83197,35.22086],[-80.82993,35.22187],[-80.82851,35.22572],[-80.82867,35.22705],[-80.82932,35.22788],[-80.83631,35.23381],[-80.83949,35.2357],[-80.84404,35.24118],[-80.84535,35.24189],[-80.84692,35.24214],[-80.8489,35.24181],[-80.85016,35.24109],[-80.8584,35.23339],[-80.86018,35.22911],[-80.86249,35.22575]]]};var layer=L.geoJSON(gj,{style:style}).addTo(map);map.fitBounds(layer.getBounds(),{padding:[24,24]});}());</script>
 </body>
 </html>
